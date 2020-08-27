@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522225628) do
+ActiveRecord::Schema.define(version: 20151028142332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "leagues", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "queue",      limit: 255
-    t.string   "tier",       limit: 255
-    t.string   "region",     limit: 255
+    t.string   "name"
+    t.string   "queue"
+    t.string   "tier"
+    t.string   "region"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,11 +37,11 @@ ActiveRecord::Schema.define(version: 20150522225628) do
     t.boolean  "is_veteran"
     t.integer  "last_played",         limit: 8
     t.integer  "league_points"
-    t.string   "mini_series",         limit: 255
-    t.string   "player_or_team_id",   limit: 255
-    t.string   "player_or_team_name", limit: 255
-    t.string   "queue",               limit: 255
-    t.string   "division",            limit: 255
+    t.string   "mini_series"
+    t.string   "player_or_team_id"
+    t.string   "player_or_team_name"
+    t.string   "queue"
+    t.string   "division"
     t.integer  "wins"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,18 +53,19 @@ ActiveRecord::Schema.define(version: 20150522225628) do
   add_index "player_leagues", ["division"], name: "index_player_leagues_on_division", using: :btree
   add_index "player_leagues", ["id", "updated_at", "is_inactive"], name: "index_player_leagues_on_id_and_updated_at_and_is_inactive", using: :btree
   add_index "player_leagues", ["league_id"], name: "index_player_leagues_on_league_id", using: :btree
+  add_index "player_leagues", ["league_points"], name: "index_player_leagues_on_league_points", using: :btree
   add_index "player_leagues", ["player_id"], name: "index_player_leagues_on_player_id", unique: true, using: :btree
 
   create_table "players", force: :cascade do |t|
     t.integer  "summoner_id",     limit: 8
-    t.string   "name",            limit: 255
+    t.string   "name"
     t.integer  "profile_icon_id"
     t.integer  "revision_date",   limit: 8
     t.integer  "summoner_level"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "region",          limit: 255
-    t.string   "internal_name",   limit: 255
+    t.string   "region"
+    t.string   "internal_name"
   end
 
   add_index "players", ["internal_name"], name: "index_players_on_internal_name", using: :btree
@@ -73,16 +73,16 @@ ActiveRecord::Schema.define(version: 20150522225628) do
   add_index "players", ["summoner_id"], name: "index_players_on_summoner_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "stats", force: :cascade do |t|
-    t.string "name",   limit: 255
-    t.string "value",  limit: 255
-    t.string "region", limit: 255
+    t.string "name"
+    t.string "value"
+    t.string "region"
   end
 
 end
